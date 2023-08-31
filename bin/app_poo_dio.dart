@@ -1,23 +1,23 @@
-// ignore_for_file: unnecessary_new
-
-import 'package:app_poo_dio/classes/Pessoa.dart';
-import 'package:app_poo_dio/classes/PessoaFisica.dart';
-import 'package:app_poo_dio/classes/PessoaJuridica.dart';
+import 'package:app_poo_dio/Service/enviar_notificacao.dart';
+import 'package:app_poo_dio/classes/pessoa_fisica.dart';
+import 'package:app_poo_dio/classes/pessoa_juridica.dart';
+import 'package:app_poo_dio/enum/tipo_notificacao.dart';
 
 void main(List<String> arguments) {
-  //Instanciando pessoa
-  var pessoa = new Pessoa("Acássio", "Rua 14");
-  print("Nome: ${pessoa.getNome()} reside em: ${pessoa.getEndereco()}");
-
   //Instanciando pessoa fisica
-  var pessoaFisica = new PessoaFisica("Junior", "Rua 15", "05636285665");
-  print("Nome: ${pessoaFisica.getNome()}, Pessoa Física reside em: ${pessoaFisica.getEndereco()} CPF: ${pessoaFisica.getCpf()}");
+  var pessoaFisica1 = PessoaFisica("Junior", "Rua 15", "05636285665");
+  print(pessoaFisica1);
 
   //Instanciando pessoa jurídica
-  var pessoaJuridica = new PessoaJuridica("Correios Tartaruga", "Rua nunca chega", "07000707070");
-  print("Nome: ${pessoaJuridica.getNome()}, Pessoa Jurídica reside em: ${pessoaJuridica.getEndereco()} CNPJ: ${pessoaJuridica.getCnpj()}");
+  var pessoaJuridica1 = PessoaJuridica("Correios Tartaruga", "Rua nunca chega", "07000707070", tipoNotificacao: TipoNotificacao.SMS);
+  print(pessoaJuridica1);
+
+  EnviarNotificacao enviarNotificacao = EnviarNotificacao();
+  enviarNotificacao.notificar(pessoaFisica1);
+  enviarNotificacao.notificar(pessoaJuridica1);
 
   //Aqui nós temos o retorno com os valores ao invés de Instance of 'Pessoa'
   //Isso é devido ao override "sobrescrita" toString
-  print(pessoa);
+  // print(pessoaJuridica1);
+  // print(pessoaFisica1);
 }
